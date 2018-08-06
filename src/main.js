@@ -1,6 +1,6 @@
-const firebase = require("firebase/app");require("firebase/database");
-const $ = require("jquery");
-import "./style.css";
+import firebase from "firebase/app";
+import "firebase/database";
+import Vue from "vue";
 
 
 // initialize firebase
@@ -21,6 +21,7 @@ var database = firebase.database();
 
 function write_data(name, room_num)
 {
+	console.log("wrote data " + room_num + " with name " + name);
 	for (let i = 0; i < 8; i++)
 	{
 		if (room_num[i] == "") {
@@ -88,36 +89,34 @@ function check_valid(list)
 }
 
 
-$(document).ready(function() {
-	$("#submitButton").click(function() {
-		name = $("#InputName").val();
-		let schedules = [];
-		for (let i = 0; i < 8; i++)
-		{
-			schedules.push($("#InputPeriod" + i).val());
-		}
-		if (!check_valid(schedules))
-		{
-			$("#ErrorMsg").text("Wrong Input, use a ROOM NUMBER, if you have sport then too bad, just leave it empty");
-			return;
-		}
-		if (name !== "")
-		{
-			write_data(name, schedules);
-		}
-		let data = get_data(schedules);
-		// Too lazy to do callbacks and Promises and stuff, deal with it
-		window.setTimeout(function() {
-			for (let i = 0; i < 8; i++)
+var vm = new Vue({
+	el: "#vm",
+	data: {
+		message: "",
+		inputs: ["", "", "", "", "", "", "", "", ""],
+		results: [[], [], [], [], [], [], [], []],
+		delete_name: "",
+		err_msg: ""
+	},
+	methods: {
+		submit: function() {
+			let name = this.inputs[0]
+			let schedule = this.inputs.slice(1);
+			if (!check_valid(schedule))
 			{
-				for (let val of data[i]) {
-					$("#ListPeriod" + i).append("<li>" + val + "</li>");
-				}
+				this.err_msg = "Wrong Input, use a ROOM NUMBER, if you have sport then too bad, just leave it empty";
+				return;
 			}
-		}, 1000);
-	});
-	$("#deleteButton").click(function() {
-		name = $("#DeleteUser").val();
-		delete_user(name);
-	});
+			if (name !== "")
+			{
+				write_data(name, schedule);
+			}
+			let data = get_data(schedule);
+			console.log(data);
+			this.results = data;
+		},
+		delete_user: function() {
+			delete_user(this.delete_name);
+		}
+	}
 });
