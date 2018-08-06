@@ -101,7 +101,10 @@ $(document).ready(function() {
 			$("#ErrorMsg").text("Wrong Input, use a ROOM NUMBER, if you have sport then too bad, just leave it empty");
 			return;
 		}
-		write_data(name, schedules);
+		if (name !== "")
+		{
+			write_data(name, schedules);
+		}
 		let data = get_data(schedules);
 		// Too lazy to do callbacks and Promises and stuff, deal with it
 		window.setTimeout(function() {
