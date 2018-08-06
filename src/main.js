@@ -1,5 +1,4 @@
-const firebase = require("firebase/app");
-require("firebase/database");
+const firebase = require("firebase/app");require("firebase/database");
 const $ = require("jquery");
 import "./style.css";
 
@@ -76,6 +75,7 @@ function delete_user(delete_name)
 
 function check_valid(list)
 {
+	console.log(list);
 	for (var i of list)
 	{
 		if (i !== "" && i.search(/\w?\d+/) == -1)
@@ -84,6 +84,7 @@ function check_valid(list)
 			return false;
 		}
 	}
+	return true;
 }
 
 
