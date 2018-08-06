@@ -74,6 +74,19 @@ function delete_user(delete_name)
 }
 
 
+function check_valid(list)
+{
+	for (var i of list)
+	{
+		if (i !== "" && i.search(/\w?\d+/) == -1)
+		{
+			console.log("Wrong Input");
+			return false;
+		}
+	}
+}
+
+
 $(document).ready(function() {
 	$("#submitButton").click(function() {
 		name = $("#InputName").val();
@@ -82,9 +95,13 @@ $(document).ready(function() {
 		{
 			schedules.push($("#InputPeriod" + i).val());
 		}
+		if (!check_valid(schedules))
+		{
+			$("#ErrorMsg").text("Wrong Input, use a ROOM NUMBER, if you have sport then too bad, just leave it empty");
+			return;
+		}
 		write_data(name, schedules);
 		let data = get_data(schedules);
-		console.log(data);
 		// Too lazy to do callbacks and Promises and stuff, deal with it
 		window.setTimeout(function() {
 			for (let i = 0; i < 8; i++)
