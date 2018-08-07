@@ -96,7 +96,9 @@ var vm = new Vue({
 		inputs: ["", "", "", "", "", "", "", "", ""],
 		results: [[], [], [], [], [], [], [], []],
 		delete_name: "",
-		err_msg: ""
+		err_msg: "",
+		show_input: true,
+		show_output: false
 	},
 	methods: {
 		submit: function() {
@@ -107,6 +109,10 @@ var vm = new Vue({
 				this.err_msg = "Wrong Input, use a ROOM NUMBER, if you have sport then too bad, just leave it empty";
 				return;
 			}
+			else
+			{
+				this.err_msg = "";
+			}
 			if (name !== "")
 			{
 				write_data(name, schedule);
@@ -114,6 +120,12 @@ var vm = new Vue({
 			let data = get_data(schedule);
 			console.log(data);
 			this.results = data;
+			this.show_input = false;
+			this.show_output = true;
+		},
+		back: function() {
+			this.show_input = true;
+			this.show_output = false;
 		},
 		delete_user: function() {
 			delete_user(this.delete_name);

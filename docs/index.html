@@ -15,44 +15,40 @@
 	</head>
 	<body>
 		<div id="vm">
-			<h1>Input</h1>
-			<h3>Name: </h3>
-			<input v-model="inputs[0]"/>
-			<h3>Period 0: </h3>
-			<input v-model="inputs[1]"/>
-			<h3>Period 1: </h3>
-			<input v-model="inputs[2]"/>
-			<h3>Period 2: </h3>
-			<input v-model="inputs[3]"/>
-			<h3>Period 3: </h3>
-			<input v-model="inputs[4]"/>
-			<h3>Period 4: </h3>
-			<input v-model="inputs[5]"/>
-			<h3>Period 5: </h3>
-			<input v-model="inputs[6]"/>
-			<h3>Period 6: </h3>
-			<input v-model="inputs[7]"/>
-			<h3>Period 7: </h3>
-			<input v-model="inputs[8]"/>
-			<br/><span> {{ err_msg }} </span><br/>
-			<button v-on:click="submit">Submit</button>
-			<h1>Result</h1>
-			<h3>Period 0</h3>
-			<ul><li v-for="result in results[0]">{{ result }}</li></ul>
-			<h3>Period 1</h3>
-			<ul><li v-for="result in results[1]">{{ result }}</li></ul>
-			<h3>Period 2</h3>
-			<ul><li v-for="result in results[2]">{{ result }}</li></ul>
-			<h3>Period 3</h3>
-			<ul><li v-for="result in results[3]">{{ result }}</li></ul>
-			<h3>Period 4</h3>
-			<ul><li v-for="result in results[4]">{{ result }}</li></ul>
-			<h3>Period 5</h3>
-			<ul><li v-for="result in results[5]">{{ result }}</li></ul>
-			<h3>Period 6</h3>
-			<ul><li v-for="result in results[6]">{{ result }}</li></ul>
-			<h3>Period 7</h3>
-			<ul><li v-for="result in results[7]">{{ result }}</li></ul>
+			<div v-if="show_input">
+				<h1>Input</h1>
+				<h3>Name: <input v-model="inputs[0]"/></h3>
+				<h3>Period 0: <input v-model="inputs[1]"/></h3>
+				<h3>Period 1: <input v-model="inputs[2]"/></h3>
+				<h3>Period 2: <input v-model="inputs[3]"/></h3>
+				<h3>Period 3: <input v-model="inputs[4]"/></h3>
+				<h3>Period 4: <input v-model="inputs[5]"/></h3>
+				<h3>Period 5: <input v-model="inputs[6]"/></h3>
+				<h3>Period 6: <input v-model="inputs[7]"/></h3>
+				<h3>Period 7: <input v-model="inputs[8]"/></h3>
+				<span> {{ err_msg }} </span><br/>
+				<button v-on:click="submit">Submit</button>
+			</div>
+			<div v-if="show_output">
+				<h1>Result</h1>
+				<h3>Period 0</h3>
+				<ul><li v-for="result in results[0]">{{ result }}</li></ul>
+				<h3>Period 1</h3>
+				<ul><li v-for="result in results[1]">{{ result }}</li></ul>
+				<h3>Period 2</h3>
+				<ul><li v-for="result in results[2]">{{ result }}</li></ul>
+				<h3>Period 3</h3>
+				<ul><li v-for="result in results[3]">{{ result }}</li></ul>
+				<h3>Period 4</h3>
+				<ul><li v-for="result in results[4]">{{ result }}</li></ul>
+				<h3>Period 5</h3>
+				<ul><li v-for="result in results[5]">{{ result }}</li></ul>
+				<h3>Period 6</h3>
+				<ul><li v-for="result in results[6]">{{ result }}</li></ul>
+				<h3>Period 7</h3>
+				<ul><li v-for="result in results[7]">{{ result }}</li></ul>
+				<button v-on:click="back">back</button>
+			</div>
 			<h1>Misc</h1>
 			<input v-model="delete_name"/><button v-on:click="delete_user">delete</button>
 		</div>
